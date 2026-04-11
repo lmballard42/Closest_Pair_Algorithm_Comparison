@@ -1,1 +1,14 @@
-# Closest_Pair
+# Closest Pair Algorithm Comparison
+
+
+
+### Lydia Ballard and Sydney Frisbee
+
+
+
+
+
+
+
+
+
