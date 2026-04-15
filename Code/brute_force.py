@@ -1,4 +1,5 @@
 import math
+import time
 
 def distance(x, y):
     return math.sqrt((y[0] - x[0])**2 + (y[1] - x[1])**2)
@@ -21,3 +22,9 @@ def closest_pair(points):
                 closest_points = (points[i], points[j])
     
     return min_dist, closest_points
+
+start = time.perf_counter()
+
+result = closest_pair()
+
+end = time.perf_counter()
