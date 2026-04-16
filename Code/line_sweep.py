@@ -1,4 +1,5 @@
 import math
+import time
 
 def distance(x, y):
     return math.sqrt((y[0] - x[0])**2 + (y[1] - x[1])**2)
@@ -30,3 +31,9 @@ def line_sweep(points):
         active_set.append(current)
 
     return min_dist, closest_points
+
+start = time.perf_counter()
+
+result = line_sweep()
+
+end = time.perf_counter()
