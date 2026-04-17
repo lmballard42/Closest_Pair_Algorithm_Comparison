@@ -1,3 +1,13 @@
+# -----------------------------------------------------------------
+# Divide and Conquer Algorithm
+# Written by Lydia Ballard
+# Reference: https://www.geeksforgeeks.org/dsa/closest-pair-of-points-using-divide-and-conquer-algorithm/
+#
+# Description: The points are recursively divided into smaller groups. 
+#   The minimum distance is calculated within each group, and during the merging step, 
+#   we will check for possible closer pairs across the dividing point.
+# -----------------------------------------------------------------
+
 import math
 
 def distance(p1, p2):
@@ -73,7 +83,3 @@ def divide_and_conquer(points):
     points.sort(key=lambda point: point[0])
 
     return min_dist_util(points, 0, n)
-
-"""
-It is returning the correct distance, but not the correct pair of points
-"""

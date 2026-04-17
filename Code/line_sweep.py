@@ -1,3 +1,13 @@
+# -----------------------------------------------------------------
+# Line Sweep Algorithm
+# Written by Sydney Frisbee
+#
+# Description: Initially, all points are sorted based on their x-coordinates. 
+#   This allows the "sweep line" to move from left to right, processing points 
+#   in an ordered manner. Then it starts iterating over all the points in 
+#   increasing order of their x-coordinates.
+# -----------------------------------------------------------------
+
 import math
 
 def distance(x, y):

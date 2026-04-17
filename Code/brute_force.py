@@ -1,3 +1,11 @@
+# -----------------------------------------------------------------
+# Brute Force Algorithm
+# Written by Sydney Frisbee
+#
+# Description: The algorithm figures out the distance between every 
+#   possible pair and store the minimum distance found
+# -----------------------------------------------------------------
+
 import math
 
 def distance(x, y):

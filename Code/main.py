@@ -1,10 +1,32 @@
+# -----------------------------------------------------------------
+# Closest Pair Problem Algorithm Comparison
+#   Authors: Lydia Ballard and Sydney Frisbee
+#   Featured Algorithms: 
+#       Brute Force
+#       Divide and Conquer
+#       Line Sweep
+#       Bee Colony Optimization (BCO)
+#
+#   This project explores the different run times of different algorithms 
+#   solving the closest pair problem. This is a problem that finds the two 
+#   closest points in a metric space, typically using Euclidean distance, 
+#   for a set of n points.
+#
+#   How to Run from command line: 
+#       python main.py
+#
+#   This script runs the 4 algorithms multiple times and writes the output to: 
+#       closest_pair_results.csv
+#   in the "Results" folder
+# -----------------------------------------------------------------
+
+
 import random
 import time
 from line_sweep import line_sweep
 from brute_force import brute_force
 from divide_and_conquer import divide_and_conquer
 import csv
-
 
 
 def generate_dataset(n):
@@ -14,7 +36,6 @@ def generate_dataset(n):
         y = random.uniform(0, 10000)
         points.append((x, y))
     return points
-
 
 
 line_sweep_times = []
@@ -38,7 +59,7 @@ while i <= 4096:
         start = time.perf_counter()
         result = brute_force(dataset)
         end = time.perf_counter()
-        print(result)
+        # print(result)
         print(f"Brute Force: Took {(end - start):0.5f} seconds")
         brute_force_5_runs.append(end-start)
 
@@ -46,7 +67,7 @@ while i <= 4096:
         start = time.perf_counter()
         result = divide_and_conquer(dataset)
         end = time.perf_counter()
-        print(result)
+        # print(result)
         print(f"Divide and Conquer: Took {(end - start):0.5f} seconds")
         divide_and_conquer_5_runs.append(end-start)
 
@@ -54,7 +75,7 @@ while i <= 4096:
         start = time.perf_counter()
         result = line_sweep(dataset)
         end = time.perf_counter()
-        print(result)
+        # print(result)
         print(f"Line Sweep: Took {(end - start):0.5f} seconds")
         line_sweep_5_runs.append(end-start)
 
@@ -64,7 +85,6 @@ while i <= 4096:
     divide_and_conquer_times.append(divide_and_conquer_5_runs)
 
     i = i*2
-
 
 
 
