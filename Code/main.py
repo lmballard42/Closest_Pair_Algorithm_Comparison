@@ -83,6 +83,6 @@ while i <= 4096:
     index += 1
 
 # Save file
-wb.save("closest_pair_results.xlsx")
+wb.save("../results/closest_pair_results.xlsx")
 
 
