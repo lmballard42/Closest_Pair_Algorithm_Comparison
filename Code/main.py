@@ -20,16 +20,17 @@
 #   in the "Results" folder
 # -----------------------------------------------------------------
 
-
 import random
 import time
 from line_sweep import line_sweep
 from brute_force import brute_force
 from divide_and_conquer import divide_and_conquer
 from bco import bee_colony_optimization
+from pathlib import Path
 import csv
 
 
+# Generates a dataset of size n of random x,y pairs
 def generate_dataset(n):
     points = []
     for _ in range(n):
@@ -39,6 +40,7 @@ def generate_dataset(n):
     return points
 
 
+# Holds times for algorithm executions
 line_sweep_times = []
 brute_force_times = []
 divide_and_conquer_times = []
@@ -46,9 +48,8 @@ bco_times = []
 
 i = 2
 
-
 # Loop generates new dataset of n points and then runs each algorithm once
-while i <= 4096:
+while i <= 8192:
     print(f"\nDataset size: {i} points")
     line_sweep_5_runs = []
     brute_force_5_runs = []
@@ -56,8 +57,24 @@ while i <= 4096:
     bco_5_runs = []
 
     for j in range(5):
+        # ** .seed makes the datasets produced the same across trials **
+        random.seed(j)
         print(f"\nDataset {j+1} of 5")
         dataset = generate_dataset(i)
+
+        # Create folder: datasets/size_i/
+        folder = Path("datasets") / f"size_{i}"
+        folder.mkdir(parents=True, exist_ok=True)
+
+        file_path = folder / f"{j+1}.csv"
+
+        with open(file_path, "w", newline="") as file:
+            writer = csv.writer(file)
+
+            writer.writerow(["X", "Y"])
+
+            for x, y in dataset:
+                writer.writerow([x, y])
 
         # Timer to see how long the Brute Algorithm takes
         start = time.perf_counter()
@@ -91,7 +108,7 @@ while i <= 4096:
         print(f"Bee Colony Optimization: Took {(end - start):0.5f} seconds")
         bco_5_runs.append(end-start)
 
-
+    # Adds array of 
     line_sweep_times.append(line_sweep_5_runs)
     brute_force_times.append(brute_force_5_runs)
     divide_and_conquer_times.append(divide_and_conquer_5_runs)
@@ -100,7 +117,7 @@ while i <= 4096:
     i = i*2
 
 
-
+# Writes results to 'closest_pair_results' in the results folder
 with open("../results/closest_pair_results.csv", "w", newline="") as file:
     writer = csv.writer(file)
 
@@ -117,7 +134,8 @@ with open("../results/closest_pair_results.csv", "w", newline="") as file:
     i = 2
     index = 0
 
-    while i <= 4096:
+    # Data row
+    while i <= 8192:
         for trial in range(5):
             writer.writerow([
                 i,
@@ -129,5 +147,4 @@ with open("../results/closest_pair_results.csv", "w", newline="") as file:
             ])
         i *= 2
         index += 1
-
 
