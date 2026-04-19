@@ -7,7 +7,7 @@
 #       Line Sweep
 #       Bee Colony Optimization (BCO)
 #
-#   This project explores the different run times of different algorithms 
+#   This project explores and compares the different run times of different algorithms 
 #   solving the closest pair problem. This is a problem that finds the two 
 #   closest points in a metric space, typically using Euclidean distance, 
 #   for a set of n points.

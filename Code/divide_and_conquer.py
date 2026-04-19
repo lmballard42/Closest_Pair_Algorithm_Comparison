@@ -66,7 +66,7 @@ def min_dist_util(points, left, right):
         closest_points = right_pair
 
     # Build strip
-    strip = [p for p in points if abs(p[0] - mid_x) < min_dist]
+    strip = [points[i] for i in range(left, right) if abs(points[i][0] - mid_x) < min_dist]
 
     strip_dist, strip_pair = strip_closest(strip, min_dist, closest_points)
 
