@@ -6,8 +6,8 @@
 
 ## Team Members
 
-- Lydia Ballard
-- Sydney Frisbee
+- [Lydia Ballard](https://github.com/lmballard42)
+- [Sydney Frisbee](https://github.com/snfrisbee42)
 
 
 ## Problem Description

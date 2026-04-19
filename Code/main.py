@@ -22,9 +22,9 @@
 
 import random
 import time
-from line_sweep import line_sweep
 from brute_force import brute_force
 from divide_and_conquer import divide_and_conquer
+from line_sweep import line_sweep
 from bco import bee_colony_optimization
 from pathlib import Path
 import csv
@@ -41,20 +41,24 @@ def generate_dataset(n):
 
 
 # Holds times for algorithm executions
-line_sweep_times = []
 brute_force_times = []
 divide_and_conquer_times = []
+line_sweep_times = []
 bco_times = []
+results = []
+bco_results = []
 
 i = 2
 
 # Loop generates new dataset of n points and then runs each algorithm once
 while i <= 8192:
     print(f"\nDataset size: {i} points")
-    line_sweep_5_runs = []
     brute_force_5_runs = []
     divide_and_conquer_5_runs = []
+    line_sweep_5_runs = []
     bco_5_runs = []
+    results_5_runs = []
+    bco_results_5_runs = []
 
     for j in range(5):
         # ** .seed makes the datasets produced the same across trials **
@@ -80,7 +84,7 @@ while i <= 8192:
         start = time.perf_counter()
         result = brute_force(dataset)
         end = time.perf_counter()
-        print(result)
+        # print(result)
         print(f"Brute Force: Took {(end - start):0.5f} seconds")
         brute_force_5_runs.append(end-start)
 
@@ -88,7 +92,7 @@ while i <= 8192:
         start = time.perf_counter()
         result = divide_and_conquer(dataset)
         end = time.perf_counter()
-        print(result)
+        # print(result)
         print(f"Divide and Conquer: Took {(end - start):0.5f} seconds")
         divide_and_conquer_5_runs.append(end-start)
 
@@ -96,23 +100,27 @@ while i <= 8192:
         start = time.perf_counter()
         result = line_sweep(dataset)
         end = time.perf_counter()
-        print(result)
+        # print(result)
         print(f"Line Sweep: Took {(end - start):0.5f} seconds")
         line_sweep_5_runs.append(end-start)
+        results_5_runs.append(result[0])
 
         # Timer to see how long the Bee Colony Optimzation Algorithm takes
         start = time.perf_counter()
         result = bee_colony_optimization(dataset)
         end = time.perf_counter()
-        print(result)
+        # print(result)
         print(f"Bee Colony Optimization: Took {(end - start):0.5f} seconds")
         bco_5_runs.append(end-start)
+        bco_results_5_runs.append(result[0])
 
-    # Adds array of 
-    line_sweep_times.append(line_sweep_5_runs)
+    # Adds array of 5 runs to array of all times
     brute_force_times.append(brute_force_5_runs)
     divide_and_conquer_times.append(divide_and_conquer_5_runs)
+    line_sweep_times.append(line_sweep_5_runs)
     bco_times.append(bco_5_runs)
+    results.append(results_5_runs)
+    bco_results.append(bco_results_5_runs)
 
     i = i*2
 
@@ -128,7 +136,9 @@ with open("../results/closest_pair_results.csv", "w", newline="") as file:
         "Brute Force Times",
         "Divide and Conquer Times",
         "Line Sweep Times",
-        "Bee Colony Optimization Times"
+        "Bee Colony Optimization Times",
+        "Actual Closest Distance",
+        "BCO Closest Distance"
     ])
 
     i = 2
@@ -143,7 +153,9 @@ with open("../results/closest_pair_results.csv", "w", newline="") as file:
                 brute_force_times[index][trial],
                 divide_and_conquer_times[index][trial],
                 line_sweep_times[index][trial],
-                bco_times[index][trial]
+                bco_times[index][trial],
+                results[index][trial],
+                bco_results[index][trial],
             ])
         i *= 2
         index += 1
